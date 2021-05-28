@@ -1,4 +1,4 @@
-package jang.payment;
+package jang;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
