@@ -102,10 +102,10 @@ public class startScreen extends JFrame implements ActionListener{
 		Object obj = e.getSource();
 		
 		if(obj == btnDaily) {
-			ds = new dailyScreen("", 300, 400);
+			ds = new dailyScreen("", 300, 600);
 			dispose();
 		} else if(obj == btnMonth) {
-			ms = new monthScreen("", 300, 400);
+			ms = new monthScreen("", 300, 600);
 			dispose();
 		}
 		//if(obj == btnExit) 할시 메인화면으로 돌아가는 코드 구현하기 나중에
