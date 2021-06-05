@@ -34,7 +34,7 @@ public class dailyScreen extends JFrame implements MouseListener {
 	private Color color;
 	
 	private String[] strTicket = {"3시간 ------------------------------------- 3,000원", "6시간 ------------------------------------- 5,000원", 
-			"9시간 ------------------------------------- 7,000원", "12시간 ------------------------------------ 9,000원"};
+			"9시간 ------------------------------------- 7,000원", "12시간 ------------------------------------  9,000원"};
 	private String[] strWay = {"카드결제","계좌이체","무통자입급","휴대폰결제","카카오페이"};
 	
 	public dailyScreen(String title, int width, int height) {
