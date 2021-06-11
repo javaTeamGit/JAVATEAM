@@ -16,10 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import jang.startScreen;
+
 public class mainScreen extends JFrame implements ActionListener{
 	private JButton btnNotice, btnInfo, btnPayment, btnRoom;
-	private JLabel time;
-	//private startScreen ss;
+	private JLabel name, time;
+	private startScreen ss;
 	private studyRoom sr;
 	public mainScreen(String title, int width, int height) {
 		setTitle(title);
@@ -107,7 +109,8 @@ public class mainScreen extends JFrame implements ActionListener{
 		}else if(obj==btnInfo) {
 			
 		}else if(obj==btnPayment) {
-			//ss=new startScreen("",300,230);
+			ss=new startScreen("",300,230);
+			dispose();
 		}else if(obj==btnRoom) {
 			sr=new studyRoom("입/퇴실",500,500);
 		}
