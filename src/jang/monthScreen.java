@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class monthScreen extends JFrame implements MouseListener {
+public class monthScreen extends JFrame implements MouseListener, ActionListener {
 	
 	private Container c;
 	private JPanel panNorth, panCenter, panSouth;
@@ -32,6 +34,7 @@ public class monthScreen extends JFrame implements MouseListener {
 	private JTextField tfName, tfEmail, tfNum;
 	private JButton btnPay;
 	private Color color;
+	private payScreen ps;
 	
 	private String[] strTicket = {"1개월 ---------------------------------- 100,000원", "2개월 ---------------------------------- 190,000원", 
 			"3개월 ---------------------------------- 280,000원", "4개월 ---------------------------------- 370,000원"};
@@ -125,7 +128,7 @@ public class monthScreen extends JFrame implements MouseListener {
 		lbl3.setPreferredSize(new Dimension(200, 10));
 		
 		//결제자 이메일
-		lblEmail = new JLabel("결제자 Email *");
+		lblEmail = new JLabel("결제자 Email");
 		lblEmail.setFont(new Font("나눔고딕", Font.BOLD, 14));
 		lblEmail.setPreferredSize(new Dimension(290, 20));
 		tfEmail = new JTextField("");
@@ -176,6 +179,7 @@ public class monthScreen extends JFrame implements MouseListener {
 		btnPay.setForeground(color.white);
 		btnPay.setBackground(color);
 		btnPay.setBounds(60, 25, 200, 50);
+		btnPay.addActionListener(this);
 		
 		panSouth.add(lblBack);
 		panSouth.add(btnPay);
@@ -213,5 +217,14 @@ public class monthScreen extends JFrame implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj == btnPay) {
+			ps = new payScreen("", 400, 400);
+			dispose();
+		}
 	}
 }
