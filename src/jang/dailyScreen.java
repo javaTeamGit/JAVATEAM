@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,18 +17,28 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class dailyScreen extends JFrame implements MouseListener, ActionListener{
+public class dailyScreen extends JFrame implements MouseListener, ActionListener {
 	
 	private Container c;
-	private JPanel panNorth, panCenter;
-	private JLabel lblBack, lblTitle, lblTicket;
-	private ImageIcon imgBack;
-	private JButton btnThree, btnSix, btnNine, btnTwelve;
+	private JPanel panNorth, panCenter, panSouth;
+	private JLabel lblExit, lblTitle, lblExplan, lblTicket, lblWay, lblName, lblEmail, lblNum, lblBack;
+	private JLabel lbl1, lbl2, lbl3, lbl4;		//칸 띄우기용 JLabel
+	private ImageIcon imgExit, imgBack;
+	private JComboBox<String> cbTicket, cbWay;
+	private JTextField tfName, tfEmail, tfNum;
+	private JButton btnPay;
+	private Color color;
+	private payScreen ps;
+	
+	private String[] strTicket = {"3시간 ------------------------------------- 3,000원", "6시간 ------------------------------------- 5,000원", 
+			"9시간 ------------------------------------- 7,000원", "12시간 ------------------------------------ 9,000원"};
+	private String[] strWay = {"카드결제","계좌이체","무통자입급","휴대폰결제","카카오페이"};
 	
 	public dailyScreen(String title, int width, int height) {
 		setTitle(title);
@@ -36,80 +48,156 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 		setResizable(false);
 		
 		c = getContentPane();
+		c.setLayout(null);
 		c.setBackground(Color.white);
 		
 		setPanNorth();
 		setPanCenter();
+		setPanSouth();
 		
-		c.add(panNorth, BorderLayout.NORTH);
-		c.add(panCenter, BorderLayout.CENTER);
+		c.add(panNorth);
+		c.add(panCenter);
+		c.add(panSouth);
 		setVisible(true);
 	}
 
 	private void setPanNorth() {
+		color = new Color(130, 0, 255);
+		
+		//북쪽 레이아웃 설정
 		panNorth = new JPanel();
-		panNorth.setBackground(Color.white);
+		panNorth.setBounds(0, 0, 300, 90);
+		panNorth.setBackground(color);
 		panNorth.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-		panNorth.setLayout(new FlowLayout(FlowLayout.LEFT));
-		//뒤로 가기 화살표 라벨
-		imgBack = new ImageIcon("image/backarrow.png");
-		lblBack = new JLabel(imgBack);
-		lblBack.addMouseListener(this);
+		panNorth.setLayout(null);
+		//종료 아이콘 라벨
+		imgExit = new ImageIcon("image/exit.png");
+		lblExit = new JLabel(imgExit);
+		lblExit.setBounds(260, 5, 20, 20);
+		lblExit.addMouseListener(this);
+		//메인타이틀
+		lblTitle = new JLabel("결제하기", lblTitle.CENTER);
+		lblTitle.setForeground(Color.white);
+		lblTitle.setFont(new Font("나눔고딕", Font.BOLD, 25));
+		lblTitle.setBounds(48, 20, 200, 30);
+		//보조타이틀
+		lblExplan = new JLabel("아래의 정보를 입력해주세요", lblExplan.CENTER);
+		lblExplan.setForeground(Color.white);
+		lblExplan.setFont(new Font("나눔고딕", Font.BOLD, 12));
+		lblExplan.setBounds(48, 50, 200, 30);
 		
-		lblTitle = new JLabel("       이용권 구매");
-		lblTitle.setFont(new Font("Serif", Font.BOLD, 15));
-		
-		panNorth.add(lblBack);
+		panNorth.add(lblExit);
 		panNorth.add(lblTitle);
+		panNorth.add(lblExplan);
 	}
 	
 	private void setPanCenter() {
 		panCenter = new JPanel();
 		panCenter.setBackground(Color.white);
+		panCenter.setBounds(0, 90, 300, 390);
+		panCenter.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panCenter.setBorder(BorderFactory.createEmptyBorder(20, 5, 0, 5));
-		panCenter.setLayout(null);
-		
-		Color color = new Color(175, 196, 224);
-		
+		//고정권
 		lblTicket = new JLabel("1회권");
-		lblTicket.setBounds(17, 30, 50, 15);
-		lblTicket.setFont(new Font("Serif", Font.BOLD, 15));
-		//이용권 버튼
-		btnThree = new JButton("3시간                                         3,000원");
-		btnThree.setBounds(17, 60, 250, 45);
-		btnThree.setFont(new Font("Serif", Font.BOLD, 13));
-		btnThree.setBackground(color);
-		btnThree.addActionListener(this);
+		lblTicket.setFont(new Font("나눔고딕", Font.BOLD, 14));
+		lblTicket.setPreferredSize(new Dimension(290, 20));
+		cbTicket = new JComboBox<String>(strTicket);
+		cbTicket.setPreferredSize(new Dimension(260, 30));
 		
-		btnSix = new JButton("6시간                                         5,000원");
-		btnSix.setBounds(17, 120, 250, 45);
-		btnSix.setFont(new Font("Serif", Font.BOLD, 13));
-		btnSix.setBackground(color);
-		btnSix.addActionListener(this);
+		lbl1 = new JLabel("");
+		lbl1.setPreferredSize(new Dimension(200, 10));
 		
-		btnNine = new JButton("9시간                                         7,000원");
-		btnNine.setBounds(17, 180, 250, 45);
-		btnNine.setFont(new Font("Serif", Font.BOLD, 13));
-		btnNine.setBackground(color);
-		btnNine.addActionListener(this);
+		//결제수단
+		lblWay = new JLabel("결제수단");
+		lblWay.setFont(new Font("나눔고딕", Font.BOLD, 14));
+		lblWay.setPreferredSize(new Dimension(290, 20));
+		cbWay = new JComboBox<String>(strWay);
+		cbWay.setPreferredSize(new Dimension(260, 30));
 		
-		btnTwelve = new JButton("12시간                                       9,000원");
-		btnTwelve.setBounds(17, 240, 250, 45);
-		btnTwelve.setFont(new Font("Serif", Font.BOLD, 13));
-		btnTwelve.setBackground(color);
-		btnTwelve.addActionListener(this);
+		lbl2 = new JLabel("");
+		lbl2.setPreferredSize(new Dimension(200, 10));
+		
+		//결제자 성함
+		lblName = new JLabel("결제자 성함 *");
+		lblName.setFont(new Font("나눔고딕", Font.BOLD, 14));
+		lblName.setPreferredSize(new Dimension(290, 20));
+		tfName = new JTextField(" 이름");
+		tfName.setPreferredSize(new Dimension(260, 30));
+		
+		lbl3 = new JLabel("");
+		lbl3.setPreferredSize(new Dimension(200, 10));
+		
+		//결제자 이메일
+		lblEmail = new JLabel("결제자 Email");
+		lblEmail.setFont(new Font("나눔고딕", Font.BOLD, 14));
+		lblEmail.setPreferredSize(new Dimension(290, 20));
+		tfEmail = new JTextField("");
+		tfEmail.setPreferredSize(new Dimension(260, 30));
+		
+		lbl4 = new JLabel("");
+		lbl4.setPreferredSize(new Dimension(200, 10));
+		
+		//결제자 이메일
+		lblNum = new JLabel("결제자 전화번호 *");
+		lblNum.setFont(new Font("나눔고딕", Font.BOLD, 14));
+		lblNum.setPreferredSize(new Dimension(290, 20));
+		tfNum = new JTextField("");
+		tfNum.setPreferredSize(new Dimension(260, 30));
 		
 		panCenter.add(lblTicket);
-		panCenter.add(btnThree);
-		panCenter.add(btnSix);
-		panCenter.add(btnNine);
-		panCenter.add(btnTwelve);
+		panCenter.add(cbTicket);
+		panCenter.add(lbl1);
+		panCenter.add(lblWay);
+		panCenter.add(cbWay);
+		panCenter.add(lbl2);
+		panCenter.add(lblName);
+		panCenter.add(tfName);
+		panCenter.add(lbl3);
+		panCenter.add(lblEmail);
+		panCenter.add(tfEmail);
+		panCenter.add(lbl4);
+		panCenter.add(lblNum);
+		panCenter.add(tfNum);
+	}
+	
+	private void setPanSouth() {
+		color = new Color(0, 150, 0);
+		
+		panSouth = new JPanel();
+		panSouth.setBackground(Color.white);
+		panSouth.setBounds(0, 480, 300, 120);
+		panSouth.setLayout(null);
+		//뒤로가기 아이콘 라벨
+		imgBack = new ImageIcon("image/back.png");
+		lblBack = new JLabel(imgBack);
+		lblBack.setBounds(10, 25, 48, 48);
+		lblBack.addMouseListener(this);
+		
+		//결제하기 아이콘 라벨
+		btnPay = new JButton("결제하기");
+		btnPay.setFont(new Font("나눔고딕", Font.BOLD, 20));
+		btnPay.setForeground(color.white);
+		btnPay.setBackground(color);
+		btnPay.setBounds(60, 25, 200, 50);
+		btnPay.addActionListener(this);
+		
+		panSouth.add(lblBack);
+		panSouth.add(btnPay);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setColor(color.GRAY);
+		g.drawLine(0, 520, 300, 520);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
-		if(obj == lblBack) {
+		if(obj == lblExit) {
+			dispose();
+		} else if(obj == lblBack) {
 			new startScreen("", 300, 230);
 			dispose();
 		}
@@ -129,36 +217,14 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(obj == btnThree) {
-			int result = JOptionPane.showConfirmDialog(null, "[ 3시간 | 3000 ] 으로 결제하시겠습니까?",
-						"결제", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if(result == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
-		} else if(obj == btnSix) {
-			int result = JOptionPane.showConfirmDialog(null, "[ 6시간 | 5000 ] 으로 결제하시겠습니까?",
-					"결제", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if(result == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
-		} else if(obj == btnNine) {
-			int result = JOptionPane.showConfirmDialog(null, "[ 9시간 | 7000 ] 으로 결제하시겠습니까?",
-					"결제", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if(result == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
-		} else if(obj == btnTwelve) {
-			int result = JOptionPane.showConfirmDialog(null, "[ 12시간 | 9000 ] 으로 결제하시겠습니까?",
-					"결제", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if(result == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
+		if(obj == btnPay) {
+			ps = new payScreen("", 400, 400);
+			dispose();
 		}
 	}
 }
