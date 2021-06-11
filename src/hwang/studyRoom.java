@@ -3,11 +3,16 @@ package hwang;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-public class studyRoom extends JFrame{
+import park.log.Registe;
+
+public class studyRoom extends JFrame implements ActionListener{
 	private JButton bt1, bt2,bt3,bt4,bt5,bt6,bt7;
 	private JButton bt8, bt9,bt10,bt11,bt12,bt13,bt14;
 	private JButton bt15, bt16,bt17,bt18,bt19,bt20,bt21;
@@ -22,7 +27,6 @@ public class studyRoom extends JFrame{
 		Container c = getContentPane();
 		c.setBackground(new Color(80,80,80,255));
 		c.setLayout(null);
-		
 		bt1= new JButton("1");
 		bt2= new JButton("2");
 		bt3= new JButton("3");
@@ -242,8 +246,58 @@ public class studyRoom extends JFrame{
 		c.add(bt33);
 		c.add(bt34);
 		c.add(bt35);
-		
+		bt1.addActionListener(this);
+		bt2.addActionListener(this);
+		bt3.addActionListener(this);
+		bt4.addActionListener(this);
+		bt5.addActionListener(this);
+		bt6.addActionListener(this);
+		bt7.addActionListener(this);
+		bt8.addActionListener(this);
+		bt9.addActionListener(this);
+		bt10.addActionListener(this);
+		bt11.addActionListener(this);
+		bt12.addActionListener(this);
+		bt13.addActionListener(this);
+		bt14.addActionListener(this);
+		bt15.addActionListener(this);
+		bt16.addActionListener(this);
+		bt17.addActionListener(this);
+		bt18.addActionListener(this);
+		bt19.addActionListener(this);
+		bt20.addActionListener(this);
+		bt21.addActionListener(this);
+		bt22.addActionListener(this);
+		bt23.addActionListener(this);
+		bt24.addActionListener(this);
+		bt25.addActionListener(this);
+		bt26.addActionListener(this);
+		bt27.addActionListener(this);
+		bt28.addActionListener(this);
+		bt29.addActionListener(this);
+		bt30.addActionListener(this);
+		bt31.addActionListener(this);
+		bt32.addActionListener(this);
+		bt33.addActionListener(this);
+		bt34.addActionListener(this);
+		bt35.addActionListener(this);
 		setVisible(true);
+	}
+	public static void main(String[] args) {
+		db.JDBC.init();
+		new studyRoom("", 500, 450);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj==bt1) {
+			int result = JOptionPane.showConfirmDialog(null, "입실하시겠습니까?", "입실",JOptionPane.YES_NO_OPTION);
+			if(result == JOptionPane.YES_OPTION) {
+				//String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"++"'";
+				//db.JDBC.executeQuery(sql1);
+			}
+		}
+		
 	}
 
 }
