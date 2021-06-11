@@ -23,6 +23,7 @@ public class startScreen extends JFrame implements ActionListener{
 	private ImageIcon imgDaily, imgMonth;
 	private dailyScreen ds;
 	private monthScreen ms;
+	private Color color;
 	
 	public startScreen(String title, int width, int height) {
 		setTitle(title);
@@ -62,7 +63,7 @@ public class startScreen extends JFrame implements ActionListener{
 		imgDaily = new ImageIcon("image/daily.png");
 		imgMonth = new ImageIcon("image/month.png");
 		
-		Color color = new Color(175, 196, 224);
+		color = new Color(175, 196, 224);
 		
 		btnDaily = new JButton("당일이용권", imgDaily);
 		btnDaily.setBackground(color);
@@ -102,12 +103,14 @@ public class startScreen extends JFrame implements ActionListener{
 		Object obj = e.getSource();
 		
 		if(obj == btnDaily) {
-			ds = new dailyScreen("", 300, 400);
+			ds = new dailyScreen("", 300, 600);
 			dispose();
 		} else if(obj == btnMonth) {
-			ms = new monthScreen("", 300, 400);
+			ms = new monthScreen("", 300, 600);
 			dispose();
 		}
-		//if(obj == btnExit) 할시 메인화면으로 돌아가는 코드 구현하기 나중에
+		if(obj == btnExit) {
+			dispose();
+		}
 	}
 }
