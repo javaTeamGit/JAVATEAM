@@ -46,7 +46,7 @@ public class mainScreen extends JFrame implements ActionListener{
 		JLabel lbl1 = new JLabel("독서실 인하공전점");
 		lbl1.setFont(new Font("맑은 고딕",Font.BOLD,18));
 		lbl1.setHorizontalAlignment(JLabel.CENTER);
-		id = new JLabel(title);
+		id = new JLabel("hydra");
 		id.setHorizontalAlignment(JLabel.CENTER);
 		id.setFont(new Font("맑은 고딕",Font.PLAIN,14));
 		p1.add(sp1);
@@ -122,20 +122,23 @@ public class mainScreen extends JFrame implements ActionListener{
 			ss=new startScreen("",300,230);
 			dispose();
 		}else if(obj==btnRoom) {
-			String sql = "SELECT SEATID FROM TIME WHERE CUSTID ='" + id + "'";
+			String sql = "SELECT * FROM TIME WHERE CUSTID ='" + id.getText() + "' AND SEATID IS NOT NULL";
 			ResultSet rs = db.JDBC.getResultSet(sql);
+			System.out.println(sql);
 			try {
 				if(rs.next()) { //이미 좌석에 앉아있었을 경우
 					sr=new studyRoom("입/퇴실",500,450);
 					int result = JOptionPane.showConfirmDialog(null, "퇴실하시겠습니까?","퇴실",JOptionPane.YES_NO_OPTION);
 					if(result == JOptionPane.YES_OPTION) {
-						String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"+id+"'";
+						String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"+id.getText()+"'";
 						db.JDBC.executeQuery(sql1);
+					}else {
+						new mainScreen(id.getText(),400,500);
+						dispose();
 					}
 				}else { //입실하는 경우
-					String sql2 = "SELECT SEATID FROM TIME WHERE CUSTID ='" + id + "'";
-					ResultSet rs2 = db.JDBC.getResultSet(sql);
 					sr=new studyRoom(id.getText(),500,450);
+					dispose();
 				}
 			} catch (SQLException e1) {
 				e1.printStackTrace();

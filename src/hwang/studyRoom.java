@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,11 +19,13 @@ public class studyRoom extends JFrame implements ActionListener{
 	private JButton bt15, bt16,bt17,bt18,bt19,bt20,bt21;
 	private JButton bt22, bt23,bt24,bt25,bt26,bt27,bt28;
 	private JButton bt29, bt30,bt31,bt32,bt33,bt34,bt35;
+	private String st;
 	public studyRoom(String title, int width, int height) {
 		setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this);
 		setResizable(false);
+		st = new String(title);
 		
 		Container c = getContentPane();
 		c.setBackground(new Color(80,80,80,255));
@@ -293,8 +296,15 @@ public class studyRoom extends JFrame implements ActionListener{
 		if(obj==bt1) {
 			int result = JOptionPane.showConfirmDialog(null, "입실하시겠습니까?", "입실",JOptionPane.YES_NO_OPTION);
 			if(result == JOptionPane.YES_OPTION) {
-				//String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"++"'";
-				//db.JDBC.executeQuery(sql1);
+				String sql1 = "UPDATE TIME SET SEATID = 1  WHERE CUSTID= '" + st + "'";
+				db.JDBC.executeQuery(sql1);
+				System.out.println(sql1);
+				Timestamp ts = new Timestamp(System.currentTimeMillis());
+				String sq1 = "UPDATE TIME SET ENTRANCE = '"+ts+"'  WHERE CUSTID= '" + st + "'";
+				db.JDBC.executeQuery(sq1);
+				System.out.println(sq1);
+				new mainScreen(st,400,500);
+				dispose();
 			}
 		}
 		
