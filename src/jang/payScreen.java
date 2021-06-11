@@ -13,7 +13,7 @@ public class payScreen extends JFrame implements MouseListener{
 	private Container c;
 	private JLabel lblScreen;
 	private ImageIcon imgPay;
-	private dailyScreen ds;
+	private endScreen es;
 	
 	public payScreen(String title, int width, int height) {
 		setTitle(title);
@@ -40,6 +40,8 @@ public class payScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblScreen) {
+			es = new endScreen("", 400, 400);
+			dispose();
 		}
 	}
 
