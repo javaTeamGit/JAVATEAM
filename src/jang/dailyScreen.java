@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -234,16 +235,16 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 			} else {
 				if(obj == btnPay) {
 				if(cbTicket.getSelectedIndex() == 0) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 2592000)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10800)";
 					db.JDBC.executeQuery(insertSql);
 				} else if(cbTicket.getSelectedIndex() == 1) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 5184000)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 21600)";
 					db.JDBC.executeQuery(insertSql);
 				} else if(cbTicket.getSelectedIndex() == 2) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10368000)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 32400)";
 					db.JDBC.executeQuery(insertSql);
 				} else if(cbTicket.getSelectedIndex() == 3) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 20736000)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 43200)";
 					db.JDBC.executeQuery(insertSql);
 				}
 				ps = new payScreen("", 400, 400);
