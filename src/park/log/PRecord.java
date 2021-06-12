@@ -68,6 +68,7 @@ public class PRecord extends JFrame {
 		header.setForeground(Color.white);
 		ImageIcon img3 = new ImageIcon("image/lib.jpg");
 		newimg = img3.getImage();
+		//das
 		header.setBackground(new Color(0, 0, 255, 190));
 		jst.getViewport().setBackground(Color.white);
 		jp2.add(jst);
