@@ -35,7 +35,7 @@ public class saleScreen extends JFrame{
 		model = new DefaultTableModel(null , header);	//리모콘 역할
 		
 		ResultSet rs = db.JDBC.getResultSet("SELECT * FROM SALES");
-		
+		//SALES 읽어와서 순서대로 jtable에 넣기
 		try {
 			int i = 0;
 			while(rs.next()) {

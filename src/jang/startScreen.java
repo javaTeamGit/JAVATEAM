@@ -104,11 +104,11 @@ public class startScreen extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		
+		//당일 시간제
 		if(obj == btnDaily) {
 			ds = new dailyScreen("", 300, 600);
 			dispose();
-		} else if(obj == btnMonth) {
+		} else if(obj == btnMonth) {	//고정석 월단위 결제
 			ms = new monthScreen("", 300, 600);
 			dispose();
 		}

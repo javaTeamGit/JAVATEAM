@@ -232,8 +232,8 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		//2592000, 5184000, 7776000, 10368000
 		Object obj = e.getSource();
+		//결제 눌렀을 때
 		if(obj == btnPay) {
 			if (tfName.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "이름을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
