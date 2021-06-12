@@ -247,7 +247,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp oneHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10800)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
 					db.JDBC.executeQuery(insertSql);
 					//1개월 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -270,7 +270,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp twoHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 21600)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
 					db.JDBC.executeQuery(insertSql);
 					//2개월 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -293,7 +293,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp thirdHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 32400)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
 					db.JDBC.executeQuery(insertSql);
 					//3개월 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -316,7 +316,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp fourHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 43200)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
 					db.JDBC.executeQuery(insertSql);
 					//4개월 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {

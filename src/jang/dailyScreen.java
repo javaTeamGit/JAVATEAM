@@ -238,7 +238,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 				if(obj == btnPay) {
 					//3시간 결제할때
 				if(cbTicket.getSelectedIndex() == 0) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10800)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '10800')";
 					db.JDBC.executeQuery(insertSql);
 					//3시간 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -254,7 +254,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 					}
 					//6시간 결제할때
 				} else if(cbTicket.getSelectedIndex() == 1) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 21600)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '21600')";
 					db.JDBC.executeQuery(insertSql);
 					//6시간 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -270,7 +270,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 					}
 					//9시간 선택할 때
 				} else if(cbTicket.getSelectedIndex() == 2) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 32400)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '32400')";
 					db.JDBC.executeQuery(insertSql);
 					//9시간 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -286,7 +286,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 					}
 					//12시간 선택할 때
 				} else if(cbTicket.getSelectedIndex() == 3) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 43200)";
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '43200')";
 					db.JDBC.executeQuery(insertSql);
 					//12시간 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {

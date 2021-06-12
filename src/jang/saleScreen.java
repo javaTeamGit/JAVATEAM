@@ -30,7 +30,7 @@ public class saleScreen extends JFrame{
 		
 		c = getContentPane();
 		
-		String header[] = {"번호", "아이디", "결제 가격", "결제 날짜"};	//헤더부분은 1차원 배열
+		String header[] = {"번호", "아이디", "결제 가격", "결제 날짜"};
 		
 		model = new DefaultTableModel(null , header);	//리모콘 역할
 		
