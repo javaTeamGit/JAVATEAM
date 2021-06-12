@@ -29,6 +29,7 @@ public class mainScreen extends JFrame implements ActionListener{
 	private JLabel id, time;
 	private startScreen ss;
 	private studyRoom sr;
+	private long rmtime = 0;
 	
 	public mainScreen(String title, int width, int height) {
 		setTitle(title);
@@ -67,6 +68,21 @@ public class mainScreen extends JFrame implements ActionListener{
 		text.setBackground(new Color(200,200,200,255));
 		time = new JLabel("00일 00시간 00분 남음                 ");
 		time.setFont(new Font("맑은 고딕",Font.BOLD,15));
+		String sq="SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'";
+		ResultSet result = db.JDBC.getResultSet(sq);
+		try {
+			if(result.next()) {
+				long rmtime = result.getLong("RMTIME");
+				long rmmi = rmtime /60%60;
+				long rmho = rmtime /(60*60)%24;
+				long rmda = rmtime /(24*60*60);
+				time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		JLabel sp3= new JLabel("");
 		sp3.setPreferredSize(new Dimension(340, 150));
@@ -101,15 +117,23 @@ public class mainScreen extends JFrame implements ActionListener{
 		p2.add(sp3);
 		p2.add(btnPayment);
 		p2.add(btnRoom);
+		
+		
+		JPanel p3 = new JPanel();
+		p3.setBackground(Color.white);
+		p3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		JLabel spp = new JLabel("   ");
 		btnLogout = new JButton("로그아웃");
 		btnLogout.setFont(new Font("맑은 고딕",Font.BOLD,15));
 		btnLogout.setBackground(new Color(72,160,109,255));
 		btnLogout.setForeground(Color.white);
 		btnLogout.addActionListener(this);
-		p2.add(btnLogout);
+		p3.add(spp);
+		p3.add(btnLogout);
 		
 		c.add(p1,BorderLayout.NORTH);
 		c.add(p2,BorderLayout.CENTER);
+		c.add(p3,BorderLayout.SOUTH);
 		setVisible(true);
 	}
 
@@ -128,7 +152,7 @@ public class mainScreen extends JFrame implements ActionListener{
 		}else if(obj==btnInfo) {
 			
 		}else if(obj==btnPayment) {
-			ss=new startScreen("",300,230);
+			ss=new startScreen(id.getText(),300,230);
 			dispose();
 		}else if(obj==btnRoom) {
 			String sq="SELECT * FROM TIME WHERE CUSTID = '"+id.getText()+"' AND RMTIME>0";
@@ -157,8 +181,20 @@ public class mainScreen extends JFrame implements ActionListener{
 									Timestamp t2 = rs2.getTimestamp("EXIT");
 									long diff = t2.getTime() - t1.getTime();
 									long diffs =diff/1000;
-									System.out.println(diffs);	
-								}else {
+									System.out.println(diffs);
+									String sql4 = "SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'";
+									ResultSet rs3 = db.JDBC.getResultSet(sql4);
+									if(rs3.next()) {
+										long rm = rs3.getLong("RMTIME");
+										rmtime = rm - diffs;
+										long rmmi = rmtime /60%60;
+										long rmho = rmtime /(60*60)%24;
+										long rmda = rmtime /(24*60*60);
+										time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+										String sql5="UPDATE TIME SET RMTIME='"+rmtime+"' WHERE CUSTID = '"+id.getText()+"'";
+										db.JDBC.executeQuery(sql5);
+										System.out.println(sql5);
+									}
 								}
 							}
 						}else { //입실하는 경우 좌석선택 화면 열기
