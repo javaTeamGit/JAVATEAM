@@ -184,62 +184,72 @@ public class mainScreen extends JFrame implements ActionListener{
 			ss=new startScreen(id.getText(),300,230);
 			dispose();
 		}else if(obj==btnRoom) {
-			String sq="SELECT * FROM TIME WHERE CUSTID = '"+id.getText()+"' AND RMTIME>0";
-			ResultSet r= db.JDBC.getResultSet(sq);
-			try {
-				if(r.next()) { //남은 시간이 0 이상이면 좌석 이용 가능
-					String sql = "SELECT * FROM TIME WHERE CUSTID ='" + id.getText() + "' AND SEATID IS NOT NULL";
-					ResultSet rs = db.JDBC.getResultSet(sql);
-					System.out.println(sql);
+			String fsck="SELECT * FROM FIXEDSEAT WHERE CUSTID = '"+id.getText()+"'";
+			ResultSet rfs = db.JDBC.getResultSet(fsck);
+			try {//고정석일경우 좌석선택 불가
+				if(rfs.next()) {
+					JOptionPane.showMessageDialog(this, "고정석 고객은 좌석 선택이 불가능합니다.","안내",JOptionPane.PLAIN_MESSAGE);
+				}
+				else {
+					String sq="SELECT * FROM TIME WHERE CUSTID = '"+id.getText()+"' AND RMTIME>0";
+					ResultSet r= db.JDBC.getResultSet(sq);
 					try {
-						if(rs.next()) { //이미 좌석에 앉아있었을 경우
-							int result = JOptionPane.showConfirmDialog(null, "퇴실하시겠습니까?","퇴실",JOptionPane.YES_NO_OPTION);
-							if(result == JOptionPane.YES_OPTION) {
-								String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"+id.getText()+"'"; // 퇴실 선택하면 좌석번호 없앰
-								db.JDBC.executeQuery(sql1);
-								Timestamp ts = new Timestamp(System.currentTimeMillis());
-								String sq1 = "UPDATE TIME SET EXIT = '"+ts+"'  WHERE CUSTID= '" +id.getText()+ "'"; // 퇴실 시간 저장
-								db.JDBC.executeQuery(sq1);
-								System.out.println(sq1);
-								String sql2 = "SELECT ENTRANCE FROM TIME WHERE CUSTID= '"+id.getText()+"'";
-								ResultSet rs1 =db.JDBC.getResultSet(sql2);
-								String sql3 = "SELECT EXIT FROM TIME WHERE CUSTID= '"+id.getText()+"'";
-								ResultSet rs2 =db.JDBC.getResultSet(sql3);
-								if(rs1.next()&&rs2.next()) { //사용시간 계산 (초 기준)
-									Timestamp t1 = rs1.getTimestamp("ENTRANCE");
-									Timestamp t2 = rs2.getTimestamp("EXIT");
-									long diff = t2.getTime() - t1.getTime();
-									long diffs =diff/1000;
-									System.out.println(diffs);
-									String sql4 = "SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'";
-									ResultSet rs3 = db.JDBC.getResultSet(sql4);
-									if(rs3.next()) {
-										long rm = rs3.getLong("RMTIME");
-										rmtime = rm - diffs;
-										long rmmi = rmtime /60%60;
-										long rmho = rmtime /(60*60)%24;
-										long rmda = rmtime /(24*60*60);
-										time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
-										String sql5="UPDATE TIME SET RMTIME='"+rmtime+"' WHERE CUSTID = '"+id.getText()+"'";
-										db.JDBC.executeQuery(sql5);
-										System.out.println(sql5);
+						if(r.next()) { //남은 시간이 0 이상이면 좌석 이용 가능
+							String sql = "SELECT * FROM TIME WHERE CUSTID ='" + id.getText() + "' AND SEATID IS NOT NULL";
+							ResultSet rs = db.JDBC.getResultSet(sql);
+							System.out.println(sql);
+							try {
+								if(rs.next()) { //이미 좌석에 앉아있었을 경우
+									int result = JOptionPane.showConfirmDialog(null, "퇴실하시겠습니까?","퇴실",JOptionPane.YES_NO_OPTION);
+									if(result == JOptionPane.YES_OPTION) {
+										String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"+id.getText()+"'"; // 퇴실 선택하면 좌석번호 없앰
+										db.JDBC.executeQuery(sql1);
+										Timestamp ts = new Timestamp(System.currentTimeMillis());
+										String sq1 = "UPDATE TIME SET EXIT = '"+ts+"'  WHERE CUSTID= '" +id.getText()+ "'"; // 퇴실 시간 저장
+										db.JDBC.executeQuery(sq1);
+										System.out.println(sq1);
+										String sql2 = "SELECT ENTRANCE FROM TIME WHERE CUSTID= '"+id.getText()+"'";
+										ResultSet rs1 =db.JDBC.getResultSet(sql2);
+										String sql3 = "SELECT EXIT FROM TIME WHERE CUSTID= '"+id.getText()+"'";
+										ResultSet rs2 =db.JDBC.getResultSet(sql3);
+										if(rs1.next()&&rs2.next()) { //사용시간 계산 (초 기준)
+											Timestamp t1 = rs1.getTimestamp("ENTRANCE");
+											Timestamp t2 = rs2.getTimestamp("EXIT");
+											long diff = t2.getTime() - t1.getTime();
+											long diffs =diff/1000;
+											System.out.println(diffs);
+											String sql4 = "SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'";
+											ResultSet rs3 = db.JDBC.getResultSet(sql4);
+											if(rs3.next()) {
+												long rm = rs3.getLong("RMTIME");
+												rmtime = rm - diffs;
+												long rmmi = rmtime /60%60;
+												long rmho = rmtime /(60*60)%24;
+												long rmda = rmtime /(24*60*60);
+												time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+												String sql5="UPDATE TIME SET RMTIME='"+rmtime+"' WHERE CUSTID = '"+id.getText()+"'";
+												db.JDBC.executeQuery(sql5);
+												System.out.println(sql5);
+											}
+										}
 									}
+								}else { //입실하는 경우 좌석선택 화면 열기
+									sr=new studyRoom(id.getText(),500,480);
+									dispose();
 								}
+							} catch (SQLException e1) {
+								e1.printStackTrace();
 							}
-						}else { //입실하는 경우 좌석선택 화면 열기
-							sr=new studyRoom(id.getText(),500,480);
-							dispose();
+						}else { //남은시간이 0이하면 이용권 결제 안내
+							JOptionPane.showMessageDialog(this, "이용권을 결제하세요.","안내",JOptionPane.PLAIN_MESSAGE);
 						}
+					} catch (HeadlessException e1) {
+						e1.printStackTrace();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-				}else { //남은시간이 0이하면 이용권 결제 안내
-					JOptionPane.showMessageDialog(this, "이용권을 결제하세요.","안내",JOptionPane.PLAIN_MESSAGE);;
 				}
-			} catch (HeadlessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
+			} catch (HeadlessException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
