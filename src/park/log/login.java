@@ -21,12 +21,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import jang.startScreen;
 public class login extends JFrame implements MouseListener, KeyListener, ActionListener {
 	private JTextField email;
-	private JTextField pw;
+	private JPasswordField pw;
 	private JButton lgBtn;
 	private JLabel IDPWlook;
 	private JLabel Sign;
@@ -60,11 +61,11 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 		email.addKeyListener(this);
 		email.setForeground(Color.gray);
 		email.setText("이메일 주소");
-		pw = new JTextField();
+		pw = new JPasswordField("비밀번호");
 //		pw.setPreferredSize(new Dimension(380, 30));
 		pw.addMouseListener(this);
 		pw.setForeground(Color.gray);
-		pw.setText("비밀번호");
+//		pw.setText("비밀번호");
 		jp2.add(email);
 		jp2.add(pw);
 
@@ -78,6 +79,7 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 		lgBtn.setBackground(new Color(0, 0, 255, 190));
 		lgBtn.setForeground(Color.white);
 		IDPWlook = new JLabel("ID/PW 찾기");
+		IDPWlook.addMouseListener(this);
 		JLabel jl2 = new JLabel(" | ");
 		Sign = new JLabel("회원가입");
 		Sign.addMouseListener(this);
@@ -124,7 +126,9 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 			dispose();
 			new Registe("회원가입", 400, 540);
 		}
-
+		if(obj==IDPWlook) {
+			new ID_PW("아이디/비번 찾기",350,200);
+		}
 	}
 
 	@Override
@@ -180,7 +184,7 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 		if(obj==lgBtn) {
 			String id = email.getText();
 			String pw2 = pw.getText();
-			System.out.println(id + " : "+ pw);
+			System.out.println(id + " : "+ pw2);
 			boolean check = checkIDPW(id,pw2);
 			if(check) {
 				dispose();
