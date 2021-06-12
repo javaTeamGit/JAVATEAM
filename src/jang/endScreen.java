@@ -20,6 +20,7 @@ public class endScreen extends JFrame implements MouseListener{
 	private JLabel lblFirst, lblSecond, lblThird,lblResult;
 	private ImageIcon imgResult;
 	private mainScreen ms;
+	private String strId;
 	
 	public endScreen(String title, int width, int height) {
 		setTitle(title);
@@ -27,6 +28,8 @@ public class endScreen extends JFrame implements MouseListener{
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		
+		strId = new String(title);
 		
 		c = getContentPane();
 		c.setLayout(null);
@@ -65,7 +68,7 @@ public class endScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblResult) {
-			new mainScreen("",400,500);
+			new mainScreen(strId,400,500);
 			dispose();
 		}
 	}
