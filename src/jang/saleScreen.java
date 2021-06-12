@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,12 +36,10 @@ public class saleScreen extends JFrame{
 		
 		ResultSet rs = db.JDBC.getResultSet("SELECT * FROM SALES");
 		
-		//long time = System.currentTimeMillis();
-		//SimpleDateFormat simpl = new SimpleDateFormat("yyyy년 MM월 dd일 aa hh시 mm분 ss초");
-		//String s = simpl.format(time);
 		try {
 			while(rs.next()) {
-				model.addRow(new Object[] {rs.getString("ORDER"), rs.getString("WAY"), rs.getString("PRICE"), rs.getString("TIME")});
+				int i = 0;
+				model.addRow(new Object[] {i++ , rs.getString("WAY"), rs.getString("PRICE"), rs.getString("TIME")});
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,6 +53,6 @@ public class saleScreen extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new saleScreen("JTable 연습", 400, 300);
+		new saleScreen("매출 확인", 400, 300);
 	}
 }

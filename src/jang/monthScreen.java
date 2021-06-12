@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -226,6 +228,8 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		//2592000, 5184000, 7776000, 10368000
 		Object obj = e.getSource();
 		if(obj == btnPay) {
 			if (tfName.getText().equals("")) {
@@ -234,18 +238,98 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 				JOptionPane.showMessageDialog(null, "핸드폰 번호를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
 			} else {
 				if(obj == btnPay) {
+					//1개월 결제할때
 				if(cbTicket.getSelectedIndex() == 0) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 2592000)";
+					//현재 시간에 한달 더하기
+					int sec = 2592000;
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(ts.getTime());
+					cal.add(Calendar.SECOND, sec);
+					Timestamp oneHour = new Timestamp(cal.getTime().getTime());
+					
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10800)";
 					db.JDBC.executeQuery(insertSql);
+					//1개월 결제하고 결제방법 선택
+					if(cbWay.getSelectedIndex() == 0) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '100,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 1) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '100,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 2) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금, '100,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 3) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '100,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 4) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '100,000원', '" + ts + "')";
+					}
+					//2개월 결제할때
 				} else if(cbTicket.getSelectedIndex() == 1) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 5184000)";
+					//현재 시간에 두달 더하기
+					int sec = 2592000;
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(ts.getTime());
+					cal.add(Calendar.SECOND, sec);
+					Timestamp twoHour = new Timestamp(cal.getTime().getTime());
+					
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 21600)";
 					db.JDBC.executeQuery(insertSql);
+					//2개월 결제하고 결제방법 선택
+					if(cbWay.getSelectedIndex() == 0) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '190,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 1) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '190,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 2) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금, '190,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 3) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '190,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 4) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '190,000원', '" + ts + "')";
+					}
+					//3개월 선택할 때
 				} else if(cbTicket.getSelectedIndex() == 2) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10368000)";
+					//현재 시간에 세달 더하기
+					int sec = 2592000;
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(ts.getTime());
+					cal.add(Calendar.SECOND, sec);
+					Timestamp thirdHour = new Timestamp(cal.getTime().getTime());
+					
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 32400)";
 					db.JDBC.executeQuery(insertSql);
+					//3개월 선택하고 결제방법 선택
+					if(cbWay.getSelectedIndex() == 0) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '280,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 1) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '280,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 2) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금, '280,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 3) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '280,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 4) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '280,000원', '" + ts + "')";
+					}
+					//4개월 선택할 때
 				} else if(cbTicket.getSelectedIndex() == 3) {
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 20736000)";
+					//현재 시간에 네달 더하기
+					int sec = 2592000;
+					Calendar cal = Calendar.getInstance();
+					cal.setTimeInMillis(ts.getTime());
+					cal.add(Calendar.SECOND, sec);
+					Timestamp fourHour = new Timestamp(cal.getTime().getTime());
+					
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 43200)";
 					db.JDBC.executeQuery(insertSql);
+					//4개월 선택하고 결제방법 선택
+					if(cbWay.getSelectedIndex() == 0) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '370,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 1) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '370,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 2) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금, '370,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 3) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '370,000원', '" + ts + "')";
+					} else if(cbWay.getSelectedIndex() == 4) {
+						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '370,000원', '" + ts + "')";
+					}
 				}
 				ps = new payScreen("", 400, 400);
 				dispose();
