@@ -27,6 +27,9 @@ import javax.swing.JTextField;
 import hwang.mainScreen;
 import jang.startScreen;
 public class adminLogin extends JFrame implements MouseListener, KeyListener, ActionListener {
+	//관리자 로그인 스크린
+	//아아디 : minsu, 비밀번호 : java1234!
+	
 	private JTextField email;
 	private JPasswordField pw;
 	private JButton lgBtn;

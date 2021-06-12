@@ -26,6 +26,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 public class adminRegiste extends JFrame implements ActionListener {
+	//관리자 레지스터
+	
 	EtchedBorder eborder;
 	private JButton rgBtn;
 	private JButton Cancle;

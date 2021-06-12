@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class dailyScreen extends JFrame implements MouseListener, ActionListener {
+	//시간제 스크린
 	
 	private Container c;
 	private JPanel panNorth, panCenter, panSouth;

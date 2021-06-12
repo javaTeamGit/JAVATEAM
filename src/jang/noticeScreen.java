@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import hwang.mainScreen;
 
 public class noticeScreen extends JFrame implements MouseListener{
+	//매장 공지 스크린
 	
 	private Container c;
 	private JLabel lblScreen;

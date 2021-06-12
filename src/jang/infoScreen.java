@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import hwang.mainScreen;
 
 public class infoScreen extends JFrame implements MouseListener{
+	//매장 정보 스크린
 	
 	private Container c;
 	private JLabel lblScreen;

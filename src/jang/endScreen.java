@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import hwang.mainScreen;
 
 public class endScreen extends JFrame implements MouseListener{
+	//결제 마지막 스크린
 	
 	private Container c;
 	private JLabel lblFirst, lblSecond, lblThird,lblResult;

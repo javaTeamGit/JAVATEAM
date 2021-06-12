@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 
 public class admin_ID_PW extends JFrame implements ActionListener, MouseListener {
+	//관리자 id,pw 찾기 스크린
 
 	private JButton idBtn;
 	private JButton pwBtn;

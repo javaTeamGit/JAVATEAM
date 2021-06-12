@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import hwang.mainScreen;
 
 public class startScreen extends JFrame implements ActionListener{
+	//결제 시작화면 스크린
 	
 	private Container c;
 	private JPanel panNorth, panCenter, panSouth;

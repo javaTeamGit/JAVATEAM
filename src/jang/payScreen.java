@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class payScreen extends JFrame implements MouseListener{
+	//결제 중 스크린
 	
 	private Container c;
 	private JLabel lblScreen;

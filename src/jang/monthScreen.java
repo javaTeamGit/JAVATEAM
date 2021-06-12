@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class monthScreen extends JFrame implements MouseListener, ActionListener {
+	//고정석 월단위 결제 스크린
 	
 	private Container c;
 	private JPanel panNorth, panCenter, panSouth;

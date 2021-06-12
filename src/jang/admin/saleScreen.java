@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class saleScreen extends JFrame{
+	//매출 확인 스크린
 	
 	private JTable table;
 	private DefaultTableModel model;
