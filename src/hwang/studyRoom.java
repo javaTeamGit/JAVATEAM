@@ -18,7 +18,7 @@ public class studyRoom extends JFrame implements ActionListener{
 	private JButton bt8, bt9,bt10,bt11,bt12,bt13,bt14;
 	private JButton bt15, bt16,bt17,bt18,bt19,bt20,bt21;
 	private JButton bt22, bt23,bt24,bt25,bt26,bt27,bt28;
-	private JButton bt29, bt30,bt31,bt32,bt33,bt34,bt35;
+	private JButton bt29, bt30,bt31,bt32,bt33,bt34,bt35 ,btBack;
 	private String st;
 	public studyRoom(String title, int width, int height) {
 		setTitle(title);
@@ -209,6 +209,12 @@ public class studyRoom extends JFrame implements ActionListener{
 		bt35.setBackground(new Color(20,20,150,255));
 		bt35.setForeground(Color.white);
 		bt35.setBounds(420, 320, 50, 50);
+		btBack = new JButton("뒤로");
+		btBack.setFont(new Font("맑은 고딕",Font.BOLD,10));
+		btBack.setBackground(new Color(250,250,250,255));
+		btBack.setForeground(Color.black);
+		btBack.setBounds(370, 380, 100, 50);
+		
 		
 		c.add(bt1);
 		c.add(bt2);
@@ -249,6 +255,7 @@ public class studyRoom extends JFrame implements ActionListener{
 		c.add(bt33);
 		c.add(bt34);
 		c.add(bt35);
+		c.add(btBack);
 		bt1.addActionListener(this);
 		bt2.addActionListener(this);
 		bt3.addActionListener(this);
@@ -284,11 +291,12 @@ public class studyRoom extends JFrame implements ActionListener{
 		bt33.addActionListener(this);
 		bt34.addActionListener(this);
 		bt35.addActionListener(this);
+		btBack.addActionListener(this);
 		setVisible(true);
 	}
 	public static void main(String[] args) {
 		db.JDBC.init();
-		new studyRoom("", 500, 450);
+		new studyRoom("", 500, 480);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -306,6 +314,10 @@ public class studyRoom extends JFrame implements ActionListener{
 				new mainScreen(st,400,500);
 				dispose();
 			}
+		}
+		else if(obj==btBack) {
+			new mainScreen(st,400,500);
+			dispose();
 		}
 		
 	}

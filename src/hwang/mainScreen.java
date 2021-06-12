@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import jang.startScreen;
+import park.log.login;
 
 public class mainScreen extends JFrame implements ActionListener{
-	private JButton btnNotice, btnInfo, btnPayment, btnRoom;
+	private JButton btnNotice, btnInfo, btnPayment, btnRoom, btnLogout;
 	private JLabel id, time;
 	private startScreen ss;
 	private studyRoom sr;
@@ -98,6 +100,12 @@ public class mainScreen extends JFrame implements ActionListener{
 		p2.add(sp3);
 		p2.add(btnPayment);
 		p2.add(btnRoom);
+		btnLogout = new JButton("로그아웃");
+		btnLogout.setFont(new Font("맑은 고딕",Font.BOLD,15));
+		btnLogout.setBackground(new Color(72,160,109,255));
+		btnLogout.setForeground(Color.white);
+		btnLogout.addActionListener(this);
+		p2.add(btnLogout);
 		
 		c.add(p1,BorderLayout.NORTH);
 		c.add(p2,BorderLayout.CENTER);
@@ -127,22 +135,38 @@ public class mainScreen extends JFrame implements ActionListener{
 			System.out.println(sql);
 			try {
 				if(rs.next()) { //이미 좌석에 앉아있었을 경우
-					sr=new studyRoom("입/퇴실",500,450);
 					int result = JOptionPane.showConfirmDialog(null, "퇴실하시겠습니까?","퇴실",JOptionPane.YES_NO_OPTION);
 					if(result == JOptionPane.YES_OPTION) {
 						String sql1 = "UPDATE TIME SET SEATID = NULL  WHERE CUSTID= '"+id.getText()+"'";
 						db.JDBC.executeQuery(sql1);
-					}else {
-						new mainScreen(id.getText(),400,500);
-						dispose();
+						Timestamp ts = new Timestamp(System.currentTimeMillis());
+						String sq1 = "UPDATE TIME SET EXIT = '"+ts+"'  WHERE CUSTID= '" +id.getText()+ "'";
+						db.JDBC.executeQuery(sq1);
+						System.out.println(sq1);
+						String sql2 = "SELECT ENTRANCE FROM TIME WHERE CUSTID= '"+id.getText()+"'";
+						ResultSet rs1 =db.JDBC.getResultSet(sql2);
+						String sql3 = "SELECT EXIT FROM TIME WHERE CUSTID= '"+id.getText()+"'";
+						ResultSet rs2 =db.JDBC.getResultSet(sql3);
+						if(rs1.next()&&rs2.next()) {
+							Timestamp t1 = rs1.getTimestamp("ENTRANCE");
+							Timestamp t2 = rs2.getTimestamp("EXIT");
+							long diff = t2.getTime() - t1.getTime();
+							long diffs =diff/1000;
+							System.out.println(diffs);
+						
+						}else {
+						}
 					}
 				}else { //입실하는 경우
-					sr=new studyRoom(id.getText(),500,450);
+					sr=new studyRoom(id.getText(),500,480);
 					dispose();
 				}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		}else if(obj==btnLogout) {
+			new login("로그인화면",400,400);
+			dispose();
 		}
 	}
 
