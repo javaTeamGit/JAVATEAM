@@ -34,6 +34,7 @@ public class studyRoom extends JFrame implements ActionListener{
 			bt[i].setFont(new Font("맑은 고딕",Font.BOLD,10));
 			bt[i].setBackground(new Color(50,50,150,255));
 			bt[i].setForeground(Color.white);
+			bt[i].setEnabled(true);
 		}
 		bt[1].setBounds(20, 20, 50, 50);
 		bt[2].setBounds(70, 20, 50, 50);
@@ -95,12 +96,24 @@ public class studyRoom extends JFrame implements ActionListener{
 		new studyRoom("", 500, 480);
 	}
 	private void SetButton() {
-		String r="SELECT SEATID FROM TIME WHERE SEATID IS NOT NULL";
+		String r="SELECT SEATID FROM TIME WHERE SEATID IS NOT NULL"; //실시간 좌석을 해놨을 경우
 		ResultSet result = db.JDBC.getResultSet(r);
 		try {
 			while(result.next()) {
 				int i=result.getInt("SEATID");
 				bt[i].setBackground(new Color(200,0,0,255));
+				bt[i].setEnabled(false);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String r1="SELECT SEATID FROM FIXEDSEAT WHERE SEATID IS NOT NULL"; //고정좌석 확인
+		ResultSet result1 = db.JDBC.getResultSet(r1);
+		try {
+			while(result1.next()) {
+				int i=result1.getInt("SEATID");
+				bt[i].setBackground(new Color(200,0,0,255));
+				bt[i].setEnabled(false);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
