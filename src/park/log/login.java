@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import hwang.mainScreen;
 import jang.startScreen;
 public class login extends JFrame implements MouseListener, KeyListener, ActionListener {
 	private JTextField email;
@@ -188,7 +189,7 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 			boolean check = checkIDPW(id,pw2);
 			if(check) {
 				dispose();
-				new jang.startScreen("", 300, 230);
+				new hwang.mainScreen("메인 화면",400,500);
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "아이디 혹은 비밀번호가 틀렸습니다.", "Message", JOptionPane.ERROR_MESSAGE);

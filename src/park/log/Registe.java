@@ -288,7 +288,7 @@ public class Registe extends JFrame implements ActionListener {
 						System.out.println("비번입력 o 하지만 다름");
 						JOptionPane.showMessageDialog(null, "비밀번호가 같지 않습니다. 다시 입력해주세요.", "Message",
 								JOptionPane.ERROR_MESSAGE);
-						for (int i = 0; i < jt.length; i++) {
+							for (int i = 0; i < jt.length; i++) {
 							jt[i].setBorder(BorderFactory.createEtchedBorder(new Color(102, 102, 255), Color.white));
 						}
 						jt[1].setBorder(BorderFactory.createEtchedBorder(new Color(255, 0, 0), Color.white));
