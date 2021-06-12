@@ -86,7 +86,6 @@ public class mainScreen extends JFrame implements ActionListener{
 						long rmhr = rmday/(60*60*1000)%24;
 						long rmdy = rmday/(24*60*60*1000);
 						time.setText(""+rmdy+"일 "+rmhr+"시간 남음                        ");
-						System.out.println(rmdy);
 					}
 				}
 			}else { //고정석을 사놓지 않았을 경우
