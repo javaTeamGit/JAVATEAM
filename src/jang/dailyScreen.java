@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -35,7 +37,6 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 	private JButton btnPay;
 	private Color color;
 	private payScreen ps;
-	
 	private String[] strTicket = {"3시간 ------------------------------------- 3,000원", "6시간 ------------------------------------- 5,000원", 
 			"9시간 ------------------------------------- 7,000원", "12시간 ------------------------------------ 9,000원"};
 	private String[] strWay = {"카드결제","계좌이체","무통자입급","휴대폰결제","카카오페이"};
@@ -121,7 +122,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 		lblName = new JLabel("결제자 성함 *");
 		lblName.setFont(new Font("나눔고딕", Font.BOLD, 14));
 		lblName.setPreferredSize(new Dimension(290, 20));
-		tfName = new JTextField(" 이름");
+		tfName = new JTextField("");
 		tfName.setPreferredSize(new Dimension(260, 30));
 		
 		lbl3 = new JLabel("");
@@ -185,6 +186,10 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 		panSouth.add(btnPay);
 	}
 	
+	public static void main(String[] args) {
+		db.JDBC.init();
+	}
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -223,8 +228,29 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj == btnPay) {
-			ps = new payScreen("", 400, 400);
-			dispose();
+			if (tfName.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "이름을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
+			} else if (tfNum.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "핸드폰 번호를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
+			} else {
+				if(obj == btnPay) {
+				if(cbTicket.getSelectedIndex() == 0) {
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 10800)";
+					db.JDBC.executeQuery(insertSql);
+				} else if(cbTicket.getSelectedIndex() == 1) {
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 21600)";
+					db.JDBC.executeQuery(insertSql);
+				} else if(cbTicket.getSelectedIndex() == 2) {
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 32400)";
+					db.JDBC.executeQuery(insertSql);
+				} else if(cbTicket.getSelectedIndex() == 3) {
+					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', 43200)";
+					db.JDBC.executeQuery(insertSql);
+				}
+				ps = new payScreen("", 400, 400);
+				dispose();
+				}
+			}
 		}
 	}
 }
