@@ -3,26 +3,33 @@ package hwang;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-public class studyRoom extends JFrame{
+import park.log.Registe;
+
+public class studyRoom extends JFrame implements ActionListener{
 	private JButton bt1, bt2,bt3,bt4,bt5,bt6,bt7;
 	private JButton bt8, bt9,bt10,bt11,bt12,bt13,bt14;
 	private JButton bt15, bt16,bt17,bt18,bt19,bt20,bt21;
 	private JButton bt22, bt23,bt24,bt25,bt26,bt27,bt28;
-	private JButton bt29, bt30,bt31,bt32,bt33,bt34,bt35;
+	private JButton bt29, bt30,bt31,bt32,bt33,bt34,bt35 ,btBack;
+	private String st;
 	public studyRoom(String title, int width, int height) {
 		setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this);
 		setResizable(false);
+		st = new String(title);
 		
 		Container c = getContentPane();
 		c.setBackground(new Color(80,80,80,255));
 		c.setLayout(null);
-		
 		bt1= new JButton("1");
 		bt2= new JButton("2");
 		bt3= new JButton("3");
@@ -202,6 +209,12 @@ public class studyRoom extends JFrame{
 		bt35.setBackground(new Color(20,20,150,255));
 		bt35.setForeground(Color.white);
 		bt35.setBounds(420, 320, 50, 50);
+		btBack = new JButton("뒤로");
+		btBack.setFont(new Font("맑은 고딕",Font.BOLD,10));
+		btBack.setBackground(new Color(250,250,250,255));
+		btBack.setForeground(Color.black);
+		btBack.setBounds(370, 380, 100, 50);
+		
 		
 		c.add(bt1);
 		c.add(bt2);
@@ -242,8 +255,71 @@ public class studyRoom extends JFrame{
 		c.add(bt33);
 		c.add(bt34);
 		c.add(bt35);
-		
+		c.add(btBack);
+		bt1.addActionListener(this);
+		bt2.addActionListener(this);
+		bt3.addActionListener(this);
+		bt4.addActionListener(this);
+		bt5.addActionListener(this);
+		bt6.addActionListener(this);
+		bt7.addActionListener(this);
+		bt8.addActionListener(this);
+		bt9.addActionListener(this);
+		bt10.addActionListener(this);
+		bt11.addActionListener(this);
+		bt12.addActionListener(this);
+		bt13.addActionListener(this);
+		bt14.addActionListener(this);
+		bt15.addActionListener(this);
+		bt16.addActionListener(this);
+		bt17.addActionListener(this);
+		bt18.addActionListener(this);
+		bt19.addActionListener(this);
+		bt20.addActionListener(this);
+		bt21.addActionListener(this);
+		bt22.addActionListener(this);
+		bt23.addActionListener(this);
+		bt24.addActionListener(this);
+		bt25.addActionListener(this);
+		bt26.addActionListener(this);
+		bt27.addActionListener(this);
+		bt28.addActionListener(this);
+		bt29.addActionListener(this);
+		bt30.addActionListener(this);
+		bt31.addActionListener(this);
+		bt32.addActionListener(this);
+		bt33.addActionListener(this);
+		bt34.addActionListener(this);
+		bt35.addActionListener(this);
+		btBack.addActionListener(this);
 		setVisible(true);
+	}
+	public static void main(String[] args) {
+		db.JDBC.init();
+		new studyRoom("", 500, 480);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj==bt1) {
+			int result = JOptionPane.showConfirmDialog(null, "입실하시겠습니까?", "입실",JOptionPane.YES_NO_OPTION);
+			if(result == JOptionPane.YES_OPTION) {
+				String sql1 = "UPDATE TIME SET SEATID = 1  WHERE CUSTID= '" + st + "'";
+				db.JDBC.executeQuery(sql1);
+				System.out.println(sql1);
+				Timestamp ts = new Timestamp(System.currentTimeMillis());
+				String sq1 = "UPDATE TIME SET ENTRANCE = '"+ts+"'  WHERE CUSTID= '" + st + "'";
+				db.JDBC.executeQuery(sq1);
+				System.out.println(sq1);
+				new mainScreen(st,400,500);
+				dispose();
+			}
+		}
+		else if(obj==btBack) {
+			new mainScreen(st,400,500);
+			dispose();
+		}
+		
 	}
 
 }
