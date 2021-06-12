@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.ScrollPane;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -22,14 +24,18 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class PRecord extends JFrame {
+import hwang.mainScreen;
+
+public class PRecord extends JFrame implements MouseListener {
 	private JLabel jl1;
 	private DefaultTableModel model;
 	private JTable userTable;
 	private Vector<String> row;
 	private Image newimg;
+	private String strId;
 	public PRecord(String title,int width,int height) {
 		setTitle(title);
+		strId=title;
 		setSize(width, height);
 		setDefaultCloseOperation(3);
 		setLocationRelativeTo(null);
@@ -45,6 +51,7 @@ public class PRecord extends JFrame {
 		Image setImg2 = setImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		ImageIcon cImge = new ImageIcon(setImg2);
 		jl1 = new JLabel(cImge);
+		jl1.addMouseListener(this);
 		jp1.add(jl1);
 		
 		
@@ -79,10 +86,11 @@ public class PRecord extends JFrame {
 	public static void main(String[] args) {
 		JFrame j = new JFrame();
 		db.JDBC.init();
-		new PRecord("고객 정보",700,500);
+		new PRecord("minsu2",700,500);
 	}
 	private void lookSum(Vector<String> row) {
-		String sql = "SELECT * FROM TIME";
+		String sql = "SELECT * FROM TIME WHERE CUSTID='"+strId+"'";
+		System.out.println(sql);
 		ResultSet rs = db.JDBC.getResultSet(sql);
 		String id ="";
 		int index =1;
@@ -99,6 +107,34 @@ public class PRecord extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		Object obj = e.getSource();
+		if(obj==jl1) {
+			dispose();	
+			new mainScreen(strId,400,500);
+		}
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -242,6 +242,8 @@ public class Registe extends JFrame implements ActionListener {
 										+ "','" + jt[1].getText() + "','" + jt[3].getText() + "','" + jt[5].getText() + "')";
 								System.out.println(sql2);
 								db.JDBC.executeQuery(sql2);
+								dispose();
+								new login("로그인화면", 400, 400);
 
 							} 
 							//이메일이 입력되어있다면
@@ -251,6 +253,8 @@ public class Registe extends JFrame implements ActionListener {
 										+ "','" + jt[4].getText() + "','" + jt[5].getText() + "')";
 								db.JDBC.executeQuery(sql2);
 								System.out.println(sql2);
+								dispose();
+								new login("로그인화면", 400, 400);
 
 							}
 							for (int i = 0; i < jt.length; i++) {
