@@ -204,9 +204,12 @@ public class ID_PW extends JFrame implements ActionListener, MouseListener {
 		int index =1;
 		try {
 			while(rs.next()) {
-				 id = rs.getString(index);
+				 id += rs.getString(index)+",";
+				 
 				System.out.println(id);
 			}
+			int nm  = id.length();
+			id = id.substring(0, nm-1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
