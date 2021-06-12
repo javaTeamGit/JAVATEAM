@@ -244,6 +244,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 				if(cbTicket.getSelectedIndex() == 0) {
 					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
 					db.JDBC.executeQuery(insertSql);
+					System.out.println(insertSql);
 					//3시간 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
 						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '3,000원', '" + ts + "')";
@@ -305,7 +306,7 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 						String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '9,000원', '" + ts + "')";
 					}
 				}
-				ps = new payScreen("", 400, 400);
+				ps = new payScreen(strId, 400, 400);
 				dispose();
 				}
 			}

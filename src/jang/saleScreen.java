@@ -21,6 +21,7 @@ public class saleScreen extends JFrame{
 	private Container c;
 	private JTextField tfName, tfKor, tfEng, tfMath;
 	private JButton btnAdd, btnRemove;
+	private JPanel panNorth, panCenter;
 	
 	public saleScreen(String title, int width, int height) {
 		setTitle(title);
@@ -53,6 +54,7 @@ public class saleScreen extends JFrame{
 	}
 	
 	public static void main(String[] args) {
+		db.JDBC.init();
 		new saleScreen("매출 확인", 400, 300);
 	}
 }

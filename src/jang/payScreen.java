@@ -14,6 +14,7 @@ public class payScreen extends JFrame implements MouseListener{
 	private JLabel lblScreen;
 	private ImageIcon imgPay;
 	private endScreen es;
+	private String strId;
 	
 	public payScreen(String title, int width, int height) {
 		setTitle(title);
@@ -21,6 +22,8 @@ public class payScreen extends JFrame implements MouseListener{
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		
+		strId = new String(title);
 		
 		c = getContentPane();
 		
@@ -40,7 +43,7 @@ public class payScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblScreen) {
-			es = new endScreen("", 400, 400);
+			es = new endScreen(strId, 400, 400);
 			dispose();
 		}
 	}

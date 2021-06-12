@@ -106,7 +106,7 @@ public class startScreen extends JFrame implements ActionListener{
 		Object obj = e.getSource();
 		//당일 시간제
 		if(obj == btnDaily) {
-			ds = new dailyScreen("", 300, 600);
+			ds = new dailyScreen(strId, 300, 600);
 			dispose();
 		} else if(obj == btnMonth) {	//고정석 월단위 결제
 			ms = new monthScreen("", 300, 600);
