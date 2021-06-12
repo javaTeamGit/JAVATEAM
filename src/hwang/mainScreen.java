@@ -68,21 +68,50 @@ public class mainScreen extends JFrame implements ActionListener{
 		text.setBackground(new Color(200,200,200,255));
 		time = new JLabel("00일 00시간 00분 남음                 ");
 		time.setFont(new Font("맑은 고딕",Font.BOLD,15));
-		String sq="SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'";
-		ResultSet result = db.JDBC.getResultSet(sq);
+		
+		String s="SELECT * FROM FIXEDSEAT WHERE CUSTID='"+id.getText()+"'";
+		ResultSet result0=db.JDBC.getResultSet(s);
 		try {
-			if(result.next()) {
-				long rmtime = result.getLong("RMTIME");
-				long rmmi = rmtime /60%60;
-				long rmho = rmtime /(60*60)%24;
-				long rmda = rmtime /(24*60*60);
-				time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+			if(result0.next()) { //고정석을 사놓았을 경우
+				String s1="SELECT ENDDAYS FROM FIXEDSEAT WHERE CUSTID='"+id.getText()+"'";
+				ResultSet result1 = db.JDBC.getResultSet(s1);
+				if(result1.next()) {
+					Timestamp cutime = new Timestamp(System.currentTimeMillis());
+					Timestamp endtime = result1.getTimestamp("ENDDAYS");
+					long rmday = endtime.getTime() - cutime.getTime();
+					if(rmday<=0) {//남은시간이 0 이하라면 새로 구매하기 위해 데이터 삭제
+						String sq1="DELETE FROM FIXEDSEAT WHERE CUSTID ='"+id.getText()+"'";
+						db.JDBC.executeQuery(sq1);
+					}else { //남은시간이 있으면 계산해서 보여줌
+						long rmhr = rmday/(60*60*1000)%24;
+						long rmdy = rmday/(24*60*60*1000);
+						time.setText(""+rmdy+"일 "+rmhr+"시간 남음                        ");
+						System.out.println(rmdy);
+					}
+				}
+			}else { //고정석을 사놓지 않았을 경우
+				String sq="SELECT RMTIME FROM TIME WHERE CUSTID = '"+id.getText()+"'"; //고정석은 없지만 실시간계산을 해놨을경우
+				ResultSet result = db.JDBC.getResultSet(sq);
+				try {
+					if(result.next()) {
+						long rmtime = result.getLong("RMTIME");
+						if(rmtime<=0) { //남은시간이 0분 이하라면 새로 구매하기 위해 데이터 삭제
+							String sq2="DELETE FROM TIME WHERE CUSTID ='"+id.getText()+"'";
+							db.JDBC.executeQuery(sq2);
+						}else { //남은시간이 있으면 남은시간 계산해서 잔여시간 보여줌
+							long rmmi = rmtime /60%60;
+							long rmho = rmtime /(60*60)%24;
+							long rmda = rmtime /(24*60*60);
+							time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+						}
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		JLabel sp3= new JLabel("");
 		sp3.setPreferredSize(new Dimension(340, 150));
