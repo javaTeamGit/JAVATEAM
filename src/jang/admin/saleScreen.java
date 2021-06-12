@@ -1,6 +1,7 @@
-package jang;
+package jang.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,7 @@ public class saleScreen extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		c = getContentPane();
+		c.setBackground(Color.white);
 		
 		String header[] = {"번호", "아이디", "결제 가격", "결제 날짜"};
 		
@@ -48,6 +50,7 @@ public class saleScreen extends JFrame{
 		table = new JTable(model);	//리모컨을 사용하는 TV역할
 		//JScrollPane으로 객체 생성
 		JScrollPane sc = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		sc.setBackground(Color.white);
 
 		c.add(sc);
 		setVisible(true);
@@ -55,6 +58,6 @@ public class saleScreen extends JFrame{
 	
 	public static void main(String[] args) {
 		db.JDBC.init();
-		new saleScreen("매출 확인", 400, 300);
+		new saleScreen("매출 확인", 700, 400);
 	}
 }

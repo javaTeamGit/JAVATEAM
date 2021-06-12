@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import hwang.mainScreen;
+
 public class startScreen extends JFrame implements ActionListener{
 	
 	private Container c;
@@ -23,6 +25,7 @@ public class startScreen extends JFrame implements ActionListener{
 	private ImageIcon imgDaily, imgMonth;
 	private dailyScreen ds;
 	private monthScreen ms;
+	private mainScreen ma;
 	private Color color;
 	private String strId;
 	
@@ -109,10 +112,11 @@ public class startScreen extends JFrame implements ActionListener{
 			ds = new dailyScreen(strId, 300, 600);
 			dispose();
 		} else if(obj == btnMonth) {	//고정석 월단위 결제
-			ms = new monthScreen("", 300, 600);
+			ms = new monthScreen(strId, 300, 600);
 			dispose();
 		}
 		if(obj == btnExit) {
+			ma = new mainScreen(strId,400,500);
 			dispose();
 		}
 	}

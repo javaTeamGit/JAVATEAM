@@ -16,6 +16,7 @@ public class infoScreen extends JFrame implements MouseListener{
 	private JLabel lblScreen;
 	private ImageIcon imgPay;
 	private mainScreen ms;
+	private String strId;
 	
 	
 	public infoScreen(String title, int width, int height) {
@@ -23,6 +24,8 @@ public class infoScreen extends JFrame implements MouseListener{
 		setSize(width, height);
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		strId = new String(title);
 		
 		c = getContentPane();
 		
@@ -46,7 +49,7 @@ public class infoScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblScreen) {
-			ms = new mainScreen("", 400, 500);
+			ms = new mainScreen(strId, 400, 500);
 			dispose();
 		}
 	}
