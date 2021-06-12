@@ -37,8 +37,8 @@ public class saleScreen extends JFrame{
 		ResultSet rs = db.JDBC.getResultSet("SELECT * FROM SALES");
 		
 		try {
+			int i = 0;
 			while(rs.next()) {
-				int i = 0;
 				model.addRow(new Object[] {i++ , rs.getString("WAY"), rs.getString("PRICE"), rs.getString("TIME")});
 			}
 		} catch (SQLException e) {

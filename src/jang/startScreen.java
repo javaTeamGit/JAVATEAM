@@ -24,6 +24,7 @@ public class startScreen extends JFrame implements ActionListener{
 	private dailyScreen ds;
 	private monthScreen ms;
 	private Color color;
+	private String strId;
 	
 	public startScreen(String title, int width, int height) {
 		setTitle(title);
@@ -31,6 +32,8 @@ public class startScreen extends JFrame implements ActionListener{
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		
+		strId = new String(title);
 		
 		c = getContentPane();
 		c.setBackground(Color.white);

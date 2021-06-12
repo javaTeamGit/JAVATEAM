@@ -12,11 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import hwang.mainScreen;
+
 public class endScreen extends JFrame implements MouseListener{
 	
 	private Container c;
 	private JLabel lblFirst, lblSecond, lblThird,lblResult;
 	private ImageIcon imgResult;
+	private mainScreen ms;
 	
 	public endScreen(String title, int width, int height) {
 		setTitle(title);
@@ -62,6 +65,7 @@ public class endScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblResult) {
+			new mainScreen("",400,500);
 			dispose();
 		}
 	}

@@ -38,6 +38,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 	private JButton btnPay;
 	private Color color;
 	private payScreen ps;
+	private String strId;
 	
 	private String[] strTicket = {"1개월 ---------------------------------- 100,000원", "2개월 ---------------------------------- 190,000원", 
 			"3개월 ---------------------------------- 280,000원", "4개월 ---------------------------------- 370,000원"};
@@ -49,6 +50,8 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		
+		strId = new String(title);
 		
 		c = getContentPane();
 		c.setLayout(null);
@@ -247,7 +250,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp oneHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
+					String insertSql = "INSERT INTO JAVA17.FIXEDSEAT (CUSTID, SEATID, ENDDAYS) "+"VALUES('" + strId + "', '', '" + oneHour + "')";
 					db.JDBC.executeQuery(insertSql);
 					//1개월 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -270,7 +273,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp twoHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
+					String insertSql = "INSERT INTO JAVA17.FIXEDSEAT (CUSTID, SEATID, ENDDAYS) "+"VALUES('" + strId + "', '', '" + twoHour + "')";
 					db.JDBC.executeQuery(insertSql);
 					//2개월 결제하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -293,7 +296,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp thirdHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
+					String insertSql = "INSERT INTO JAVA17.FIXEDSEAT (CUSTID, SEATID, ENDDAYS) "+"VALUES('" + strId + "', '', '" + thirdHour + "')";
 					db.JDBC.executeQuery(insertSql);
 					//3개월 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
@@ -316,7 +319,7 @@ public class monthScreen extends JFrame implements MouseListener, ActionListener
 					cal.add(Calendar.SECOND, sec);
 					Timestamp fourHour = new Timestamp(cal.getTime().getTime());
 					
-					String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('', '', '', '', '')";
+					String insertSql = "INSERT INTO JAVA17.FIXEDSEAT (CUSTID, SEATID, ENDDAYS) "+"VALUES('" + strId + "', '', '" + fourHour + "')";
 					db.JDBC.executeQuery(insertSql);
 					//4개월 선택하고 결제방법 선택
 					if(cbWay.getSelectedIndex() == 0) {
