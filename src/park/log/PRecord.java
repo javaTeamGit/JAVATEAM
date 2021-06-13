@@ -33,11 +33,12 @@ public class PRecord extends JFrame implements MouseListener {
 	private Vector<String> row;
 	private Image newimg;
 	private String strId;
+	private Vector<String> column;
 	public PRecord(String title,int width,int height) {
 		setTitle(title);
 		strId=title;
 		setSize(width, height);
-		setDefaultCloseOperation(3);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
@@ -57,7 +58,7 @@ public class PRecord extends JFrame implements MouseListener {
 		
 		JPanel jp2 = new JPanel();
 		jp2.setLayout(new GridLayout(0,1));
-		Vector<String> column = new Vector<>();
+		column = new Vector<>();
 		column.add("ID");
 		column.add("좌석");
 		column.add("입실시간");
@@ -86,12 +87,15 @@ public class PRecord extends JFrame implements MouseListener {
 	public static void main(String[] args) {
 		JFrame j = new JFrame();
 		db.JDBC.init();
-		new PRecord("minsu2",700,500);
+		new PRecord("xptmxm123",700,500);
 	}
 	private void lookSum(Vector<String> row) {
 		String sql = "SELECT * FROM TIME WHERE CUSTID='"+strId+"'";
+		String sql2 = "SELECT * FROM FIXEDSEAT WHERE CUSTID='"+strId+"'";
 		System.out.println(sql);
+		System.out.println(sql2);
 		ResultSet rs = db.JDBC.getResultSet(sql);
+		
 		String id ="";
 		int index =1;
 		try {
@@ -107,7 +111,27 @@ public class PRecord extends JFrame implements MouseListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ResultSet rs2 = db.JDBC.getResultSet(sql2);
 		
+		 id ="";
+		 index =1;
+		try {
+			while(rs2.next()) {
+				column.clear();
+				column.add("CUSTID");
+				column.add("SEATID");
+				column.add("ENDDAYS");
+				for (int i = 1; i <=3; i++) {
+					 id = rs2.getString(i);
+					 row.add(id);
+						System.out.println(id);
+				}
+				index++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -119,7 +143,6 @@ public class PRecord extends JFrame implements MouseListener {
 		Object obj = e.getSource();
 		if(obj==jl1) {
 			dispose();	
-			new mainScreen(strId,400,500);
 		}
 	}
 	@Override
