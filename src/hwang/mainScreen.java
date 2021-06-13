@@ -247,8 +247,10 @@ public class mainScreen extends JFrame implements ActionListener{
 		
 		if(obj==btnNotice) {
 			new noticeScreen("매장 공지",700,510);
+			dispose();
 		}else if(obj==btnInfo) {
 			new infoScreen("매장 정보",700,510);
+			dispose();
 		}else if(obj==btnPayment) {
 			String fsck1="SELECT * FROM FIXEDSEAT WHERE CUSTID = '"+id.getText()+"'";
 			ResultSet rfs1 = db.JDBC.getResultSet(fsck1);

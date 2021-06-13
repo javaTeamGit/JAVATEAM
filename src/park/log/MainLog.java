@@ -106,6 +106,7 @@ public class MainLog extends JFrame implements ActionListener {
 		
 	}
 	public static void main(String[] args) {
+		db.JDBC.init();
 		JFrame j = new JFrame();
 		new MainLog("로그인시작",600,500);
 	}	
