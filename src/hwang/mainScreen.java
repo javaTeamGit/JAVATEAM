@@ -317,7 +317,7 @@ public class mainScreen extends JFrame implements ActionListener{
 												long rmmi = rmtime /60%60;
 												long rmho = rmtime /(60*60)%24;
 												long rmda = rmtime /(24*60*60);
-												time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음                 ");
+												time.setText(""+rmda+"일 "+rmho+"시간 "+rmmi+"분 남음");
 												String sql5="UPDATE TIME SET RMTIME='"+rmtime+"' WHERE CUSTID = '"+id.getText()+"'";
 												db.JDBC.executeQuery(sql5);
 												System.out.println(sql5);
