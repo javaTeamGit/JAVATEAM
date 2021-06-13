@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import park.log.Registe;
@@ -19,15 +20,19 @@ public class studyRoom extends JFrame implements ActionListener{
 	private JButton[] bt=new JButton[36];
 	private JButton btBack;
 	private String st;
+	private int seat;
+	
 	public studyRoom(String title, int width, int height) {
 		setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this);
 		setResizable(false);
 		st = new String(title);
+		setDefaultCloseOperation(3);
 		
 		Container c = getContentPane();
-		c.setBackground(new Color(120,120,120,255));
+		//c.setBackground(new Color(120,120,120,255));
+		c.setBackground(new Color(230,230,230,255));
 		c.setLayout(null);
 		for(int i=1;i<36;i++) {
 			bt[i] = new JButton(""+i);
@@ -76,10 +81,14 @@ public class studyRoom extends JFrame implements ActionListener{
 		bt[34].setBounds(420, 270, 50, 50);
 		bt[35].setBounds(420, 320, 50, 50);
 		btBack = new JButton("뒤로");
-		btBack.setFont(new Font("맑은 고딕",Font.BOLD,10));
+		btBack.setFont(new Font("맑은 고딕",Font.BOLD,15));
 		btBack.setBackground(new Color(250,250,250,255));
 		btBack.setForeground(Color.black);
 		btBack.setBounds(370, 380, 100, 50);
+		JLabel lbl=new JLabel("/ 35");
+		lbl.setFont(new Font("맑은 고딕",Font.BOLD,15));
+		lbl.setBounds(330, 380, 100, 40);
+		
 
 		SetButton();
 		
@@ -87,6 +96,13 @@ public class studyRoom extends JFrame implements ActionListener{
 			c.add(bt[i]);
 			bt[i].addActionListener(this);
 		}
+		JLabel seatlb=new JLabel();
+		seatlb.setText(String.valueOf(seat));
+		seatlb.setFont(new Font("맑은 고딕",Font.BOLD,15));
+		seatlb.setBounds(300, 380, 100, 40);
+		
+		c.add(seatlb);
+		c.add(lbl);
 		c.add(btBack);
 		btBack.addActionListener(this);
 		setVisible(true);
@@ -96,6 +112,7 @@ public class studyRoom extends JFrame implements ActionListener{
 		new studyRoom("", 500, 480);
 	}
 	private void SetButton() {
+		seat=35;
 		String r="SELECT SEATID FROM TIME WHERE SEATID IS NOT NULL"; //실시간 좌석을 해놨을 경우
 		ResultSet result = db.JDBC.getResultSet(r);
 		try {
@@ -103,6 +120,7 @@ public class studyRoom extends JFrame implements ActionListener{
 				int i=result.getInt("SEATID");
 				bt[i].setBackground(new Color(200,0,0,255));
 				bt[i].setEnabled(false);
+				seat=seat-1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,6 +132,7 @@ public class studyRoom extends JFrame implements ActionListener{
 				int i=result1.getInt("SEATID");
 				bt[i].setBackground(new Color(200,0,0,255));
 				bt[i].setEnabled(false);
+				seat=seat-1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,13 +152,13 @@ public class studyRoom extends JFrame implements ActionListener{
 					String sq1 = "UPDATE TIME SET ENTRANCE = '"+ts+"'  WHERE CUSTID= '" + st + "'";
 					db.JDBC.executeQuery(sq1);
 					System.out.println(sq1);
-					new mainScreen(st,400,500);
+					new mainScreen(st,450,600);
 					dispose();
 				}
 			}
 		}
 		if(obj==btBack) {
-			new mainScreen(st,400,500);
+			new mainScreen(st,450,600);
 			dispose();
 		}
 		

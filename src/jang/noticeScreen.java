@@ -24,7 +24,6 @@ public class noticeScreen extends JFrame implements MouseListener{
 		setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		strId = new String(title);
 		
