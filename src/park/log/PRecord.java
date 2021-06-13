@@ -87,6 +87,7 @@ public class PRecord extends JFrame implements MouseListener {
 	public static void main(String[] args) {
 		JFrame j = new JFrame();
 		db.JDBC.init();
+		//끝!
 		new PRecord("xptmxm123",700,500);
 	}
 	private void lookSum(Vector<String> row) {
