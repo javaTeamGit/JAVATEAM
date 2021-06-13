@@ -49,7 +49,7 @@ public class infoScreen extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Object obj = e.getSource();
 		if(obj == lblScreen) {
-			ms = new mainScreen(strId, 400, 500);
+			ms = new mainScreen(strId, 450, 600);
 			dispose();
 		}
 	}

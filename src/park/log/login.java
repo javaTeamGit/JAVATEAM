@@ -189,7 +189,7 @@ public class login extends JFrame implements MouseListener, KeyListener, ActionL
 			boolean check = checkIDPW(id,pw2);
 			if(check) {
 				dispose();
-				new hwang.mainScreen(id, 400, 500);
+				new hwang.mainScreen(id, 450, 600);
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "아이디 혹은 비밀번호가 틀렸습니다.", "Message", JOptionPane.ERROR_MESSAGE);

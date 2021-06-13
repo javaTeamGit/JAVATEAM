@@ -117,7 +117,7 @@ public class startScreen extends JFrame implements ActionListener{
 			dispose();
 		}
 		if(obj == btnExit) {
-			ma = new mainScreen(strId,400,500);
+			ma = new mainScreen(strId,450,600);
 			dispose();
 		}
 	}
