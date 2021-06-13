@@ -3,6 +3,9 @@ package jang.admin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -15,15 +18,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class saleScreen extends JFrame{
+import park.log.login;
+
+public class saleScreen extends JFrame implements ActionListener{
 	//매출 확인 스크린
 	
 	private JTable table;
 	private DefaultTableModel model;
 	private Container c;
-	private JTextField tfName, tfKor, tfEng, tfMath;
-	private JButton btnAdd, btnRemove;
-	private JPanel panNorth, panCenter;
+	private JPanel panSouth, panCenter;
+	private JButton btnLogout;
 	
 	public saleScreen(String title, int width, int height) {
 		setTitle(title);
@@ -34,7 +38,10 @@ public class saleScreen extends JFrame{
 		c = getContentPane();
 		c.setBackground(Color.white);
 		
-		String header[] = {"번호", "아이디", "결제 가격", "결제 날짜"};
+		panCenter = new JPanel();
+		panCenter.setLayout(new BorderLayout());
+		
+		String header[] = {"번호", "결제수단", "결제 가격", "결제 날짜", "아이디"};
 		
 		model = new DefaultTableModel(null , header);	//리모콘 역할
 		
@@ -43,7 +50,7 @@ public class saleScreen extends JFrame{
 		try {
 			int i = 0;
 			while(rs.next()) {
-				model.addRow(new Object[] {i++ , rs.getString("WAY"), rs.getString("PRICE"), rs.getString("TIME")});
+				model.addRow(new Object[] {i++ , rs.getString("WAY"), rs.getString("PRICE"), rs.getString("TIME"), rs.getString("ID")});
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,14 +58,34 @@ public class saleScreen extends JFrame{
 		table = new JTable(model);	//리모컨을 사용하는 TV역할
 		//JScrollPane으로 객체 생성
 		JScrollPane sc = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		sc.setBackground(Color.white);
+		
+		//로그아웃
+		panSouth = new JPanel();
+		
+		btnLogout = new JButton("로그아웃");
+		btnLogout.setPreferredSize(new Dimension(340, 40));
+		btnLogout.setBackground(new Color(0, 0, 255, 190));
+		btnLogout.setForeground(Color.white);
+		btnLogout.addActionListener(this);
 
-		c.add(sc);
+		c.add(panCenter, BorderLayout.CENTER);
+		c.add(panSouth, BorderLayout.SOUTH);
+		panCenter.add(sc);
+		panSouth.add(btnLogout);
 		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		db.JDBC.init();
 		new saleScreen("매출 확인", 700, 400);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj == btnLogout) {
+			new adminLogin("관리자 로그인화면",400,400);
+			dispose();
+		}
 	}
 }

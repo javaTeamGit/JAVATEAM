@@ -193,7 +193,7 @@ public class adminLogin extends JFrame implements MouseListener, KeyListener, Ac
 			boolean check = checkIDPW(id,pw2);
 			if(check) {
 				dispose();
-				new saleScreen(id, 400, 500);
+				new saleScreen(id, 700, 400);
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "아이디 혹은 비밀번호가 틀렸습니다.", "Message", JOptionPane.ERROR_MESSAGE);

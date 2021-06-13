@@ -249,35 +249,35 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 					if(cbTicket.getSelectedIndex() == 0) {
 						if(cbWay.getSelectedIndex() == 0) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '3,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카드결제', '3,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 							System.out.println(insertSql);
 							System.out.println(insertSale);
 						} else if(cbWay.getSelectedIndex() == 1) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '3,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('계좌이체', '3,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 							System.out.println(insertSql);
 							System.out.println(insertSale);
 						} else if(cbWay.getSelectedIndex() == 2) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금', '3,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('무통장입금', '3,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 							System.out.println(insertSql);
 							System.out.println(insertSale);
 						} else if(cbWay.getSelectedIndex() == 3) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '3,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('휴대폰결제', '3,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 							System.out.println(insertSql);
 							System.out.println(insertSale);
 						} else if(cbWay.getSelectedIndex() == 4) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '10800')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '3,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카카오페이', '3,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 							System.out.println(insertSql);
@@ -286,81 +286,81 @@ public class dailyScreen extends JFrame implements MouseListener, ActionListener
 					} else if(cbTicket.getSelectedIndex() == 1) {
 						if(cbWay.getSelectedIndex() == 0) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '21600')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '5,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카드결제', '5,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 1) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '21600')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '5,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('계좌이체', '5,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 2) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '21600')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금', '5,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('무통장입금', '5,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 3) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '21600')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '5,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('휴대폰결제', '5,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 4) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '21600')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '5,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카카오페이', '5,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						}
 					} else if(cbTicket.getSelectedIndex() == 2) {
 						if(cbWay.getSelectedIndex() == 0) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '32400')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '7,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카드결제', '7,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 1) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '32400')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '7,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('계좌이체', '7,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 2) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '32400')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금', '7,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('무통장입금', '7,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 3) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '32400')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '7,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('휴대폰결제', '7,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 4) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '32400')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '7,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카카오페이', '7,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						}
 					} else if(cbTicket.getSelectedIndex() == 3) {
 						if(cbWay.getSelectedIndex() == 0) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '43200')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카드결제', '9,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카드결제', '9,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 1) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '43200')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('계좌이체', '9,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('계좌이체', '9,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 2) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '43200')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('무통장입금', '9,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('무통장입금', '9,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 3) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '43200')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('휴대폰결제', '9,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('휴대폰결제', '9,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						} else if(cbWay.getSelectedIndex() == 4) {
 							String insertSql = "INSERT INTO JAVA17.TIME (CUSTID, SEATID, ENTRANCE, EXIT, RMTIME) "+"VALUES('" + strId + "', '', '', '', '43200')";
-							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME) " +"VALUES('카카오페이', '9,000원', '" + ts + "')";
+							String insertSale = "INSERT INTO JAVA17.SALES (WAY, PRICE, TIME, ID) " +"VALUES('카카오페이', '9,000원', '" + ts + "', '" + strId + "')";
 							db.JDBC.executeQuery(insertSql);
 							db.JDBC.executeQuery(insertSale);
 						}
